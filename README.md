@@ -33,7 +33,3 @@ A role-based **Employee Management System** built using **Django** that allows a
 - **Frontend:** Django Templates (HTML)  
 - **Version Control:** Git, GitHub  
 
----
-
-## 📂 Project Structure
-
