@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Filter Employees{% endblock %}
+
+{% block content %}
+<!-- Back Button -->
+<a href="/" class="btn btn-secondary mb-3">
+    &larr; Back to Dashboard
+</a>
+
+
+<div class="card shadow-sm p-4 mb-4">
+    <h2 class="mb-4">Filter & Search Employees</h2>
+
+    <form method="get">
+        <div class="form-row">
+
+            <!-- Search by Name -->
+            <div class="col-md-3 mb-3">
+                <input type="text" name="name" class="form-control" placeholder="Search by Name" value="{{ request.GET.name }}">
+            </div>
+
+            <!-- Department Filter -->
+            <div class="col-md-3 mb-3">
+                <select name="dept" class="form-control">
+                    <option value="">All Departments</option>
+                    {% for dept in depts %}
+                        <option value="{{ dept.id }}" {% if request.GET.dept == dept.id|stringformat:"s" %}selected{% endif %}>
+                            {{ dept.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Role Filter -->
+            <div class="col-md-3 mb-3">
+                <select name="role" class="form-control">
+                    <option value="">All Roles</option>
+                    {% for role in roles %}
+                        <option value="{{ role.id }}" {% if request.GET.role == role.id|stringformat:"s" %}selected{% endif %}>
+                            {{ role.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Salary Range -->
+            <div class="col-md-3 mb-3">
+                <div class="input-group">
+                    <input type="number" name="min_salary" class="form-control" placeholder="Min Salary" value="{{ request.GET.min_salary }}">
+                    <input type="number" name="max_salary" class="form-control" placeholder="Max Salary" value="{{ request.GET.max_salary }}">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'filter_emp' %}" class="btn btn-secondary btn-block">Clear Filters</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card shadow-sm p-4">
+    <h3 class="mb-4">Employee List</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in emps %}
+                    <tr>
+                        <td>{{ emp.first_name }} {{ emp.last_name }}</td>
+                        <td>{{ emp.dept.name }}</td>
+                        <td>{{ emp.role.name }}</td>
+                        <td>₹ {{ emp.salary|floatformat:2 }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">No employees found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

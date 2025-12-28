@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}All Employees{% endblock %}
+
+{% block content %}
+<!-- Back Button -->
+<a href="/" class="btn btn-secondary mb-3">
+    &larr; Back to Dashboard
+</a>
+
+<div class="card shadow-sm p-4">
+    <h3 class="mb-4">Employee List</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Bonus</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Hire Date</th>
+                    <th scope="col">Profile Picture</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in emps %}
+                <tr>
+                    <th scope="row">{{emp.id}}</th>
+                    <td>{{emp.first_name}}</td>
+                    <td>{{emp.last_name}}</td>
+                    <td>{{emp.salary}}</td>
+                    <td>{{emp.bonus}}</td>
+                    <td>{{emp.phone}}</td>
+                    <td>{{emp.role.name}}</td>
+                    <td>{{emp.dept.name}}</td>
+                    <td>{{emp.dept.location}}</td>
+                    <td>{{emp.hire_date}}</td>
+                    <td>
+                        {% if emp.profile_pic %}
+                            <img src="{{ emp.profile_pic.url }}" alt="Profile Pic" width="100" height="100">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}profile_pics/default_profile.png" alt="Default Profile" width="100" height="100">
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Top Cards Row -->
+<div class="row row-eq-height">
+
+    <!-- Employees Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-center p-4 shadow-sm card-hover d-flex flex-column">
+            <div class="mb-2">
+                <i class="fas fa-users fa-2x text-primary"></i>
+            </div>
+            <h5 class="mb-2 font-weight-bold">Employees</h5>
+            <p class="text-muted">Total: {{ total_employees }}</p>
+            <a href="/all_emp" class="btn btn-primary btn-sm btn-gradient mt-auto">View</a>
+        </div>
+    </div>
+
+    <!-- Add Employee Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-center p-4 shadow-sm card-hover d-flex flex-column">
+            <div class="mb-2">
+                <i class="fas fa-user-plus fa-2x text-success"></i>
+            </div>
+            <h5 class="mb-2 font-weight-bold">Add Employee</h5>
+            <p class="text-muted">Quickly add new employee</p>
+            <a href="/add_emp" class="btn btn-primary btn-sm btn-gradient mt-auto">Add</a>
+        </div>
+    </div>
+
+    <!-- Filter Employee Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-center p-4 shadow-sm card-hover d-flex flex-column">
+            <div class="mb-2">
+                <i class="fas fa-filter fa-2x text-warning"></i>
+            </div>
+            <h5 class="mb-2 font-weight-bold">Filter</h5>
+            <p class="text-muted">Search by department, role, or salary</p>
+            <a href="/filter_emp" class="btn btn-primary btn-sm btn-gradient mt-auto">Filter</a>
+        </div>
+    </div>
+
+    <!-- Remove Employee Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-center p-4 shadow-sm card-hover d-flex flex-column">
+            <div class="mb-2">
+                <i class="fas fa-trash-alt fa-2x text-danger"></i>
+            </div>
+            <h5 class="mb-2 font-weight-bold">Remove</h5>
+            <p class="text-muted">Delete employee record safely</p>
+            <a href="/remove_emp" class="btn btn-danger btn-sm btn-gradient mt-auto">Delete</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Stats Row -->
+<div class="row mt-4 row-eq-height">
+    <div class="col-md-4 mb-4">
+        <div class="card p-4 shadow-sm text-center card-hover d-flex flex-column">
+            <h5>Total Departments</h5>
+            <h2>{{ total_departments }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-4 shadow-sm text-center card-hover d-flex flex-column">
+            <h5>Total Roles</h5>
+            <h2>{{ total_roles }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-4 shadow-sm text-center card-hover d-flex flex-column">
+            <h5>Average Salary</h5>
+            <h2>${{ avg_salary }}</h2>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<!-- Custom Styles -->
+<style>
+    /* Equal height rows */
+    .row-eq-height {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .row-eq-height > [class*="col-"] {
+        display: flex;
+    }
+
+    .row-eq-height > [class*="col-"] .card {
+        flex: 1 1 auto; /* Stretch all cards equally */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Card hover effect */
+    .card-hover {
+        border-radius: 12px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+</style>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Add Employee{% endblock %}
+
+{% block content %}
+<!-- Back Button -->
+<a href="/" class="btn btn-secondary mb-3">
+    &larr; Back to Dashboard
+</a>
+
+<div class="card p-4 shadow-sm">
+    <h2 class="mb-4">Add New Employee</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="/add_emp/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="salary">Salary</label>
+                <input type="number" class="form-control" id="salary" name="salary" placeholder="Salary">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="bonus">Bonus</label>
+                <input type="number" class="form-control" id="bonus" name="bonus" placeholder="Bonus">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="role">Role</label>
+                <select name="role" id="role" class="form-control">
+                    {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="department">Department</label>
+                <select name="dept" id="department" class="form-control">
+                    {% for dept in depts %}
+                        <option value="{{ dept.id }}">{{ dept.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+             <div class="form-group col-md-6">
+                <label for="profile_pic">Profile Picture</label>
+                <input type="file" name="profile_pic" class="form-control" accept="image/*"> 
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>
+{% endblock %}
